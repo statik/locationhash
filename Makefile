@@ -1,5 +1,8 @@
-check:
+check: lint
 	@nosetests --config=.nosecfg
+
+lint:
+	@find . -name \*.py -exec flake8 {} \; 
 
 info:
 	@git shortlog -2
