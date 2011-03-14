@@ -16,12 +16,13 @@ Copyright 2011 Elliot Murphy
 """
 
 import unittest
-from locationhash import locationhash
+from locationhash.locationhash import locationhash
+
 
 class locationhashTests(unittest.TestCase):
     def setUp(self):
         pass
-        
+
     def test_hash(self):
         print "more"
         pass
