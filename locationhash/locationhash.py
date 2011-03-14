@@ -27,11 +27,26 @@ class World2dGrid:
         self.width_scale_factor = width / 360
         self.height_scale_factor = height / 180
 
-    def calculate_bucket(self, latitude, longitude):
+    def calculate_bucket_simple(self, latitude, longitude):
+        """Very simple bucket calculation."""
+        assert -90.0 <= latitude <= 90.0, "impossible latitude"
+        assert -180 <= longitude <= 180, "impossible longitude"
         latitude = latitude + self.latitude_offset
         longitude = longitude + self.longitude_offset
         return (int(longitude * self.width_scale_factor),
             int(latitude * self.height_scale_factor))
+
+    def calculate_bucket_geohash(self, latitude, longitude):
+        """Calculate bucket using geohash algorithm
+
+        http://en.wikipedia.org/wiki/Geohash"""
+        raise NotImplementedError
+
+    def calculate_bucket_csquares(self, latitude, longitude):
+        """Calculate bucket using C-Squares method
+
+        http://en.wikipedia.org/wiki/C-squares"""
+        raise NotImplementedError
 
 
 @memoized
@@ -43,4 +58,4 @@ def _get_world_grid(horizontal_slices, vertical_slices):
 def grid_id(latitude, longitude, horizontal_slices, vertical_slices):
     """Given a location, calculate the grid ID."""
     grid = _get_world_grid(horizontal_slices, vertical_slices)
-    return grid.calculate_bucket(latitude, longitude)
+    return grid.calculate_bucket_simple(latitude, longitude)

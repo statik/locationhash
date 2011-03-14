@@ -17,17 +17,27 @@ Copyright 2011 Elliot Murphy
 
 import unittest2 as unittest
 from locationhash import grid_id
+from locationhash.locationhash import World2dGrid
 
 
 class locationhashTests(unittest.TestCase):
     def setUp(self):
-        pass
+        self.latitude = 64.2145
+        self.longitude = 24.856
+        self.grid_width = 400
+        self.grid_height = 600
+        self.grid = World2dGrid()
 
-    def test_grid_function(self):
-        latitude = 64.2145
-        longitude = 24.856
-        grid_width = 400
-        grid_height = 600
+    def test_convenience_function(self):
         expected_result = "FIXME"
-        location_id = grid_id(latitude, longitude, grid_width, grid_height)
+        location_id = grid_id(self.latitude, self.longitude,
+            self.grid_width, self.grid_height)
         self.assertEqual(location_id, expected_result)
+
+    def test_c_squares(self):
+        with self.assertRaises(NotImplementedError):
+            self.grid.calculate_bucket_csquares(self.latitude, self.longitude)
+
+    def test_geohash(self):
+        with self.assertRaises(NotImplementedError):
+            self.grid.calculate_bucket_geohash(self.latitude, self.longitude)
