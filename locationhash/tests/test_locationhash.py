@@ -15,14 +15,19 @@ Copyright 2011 Elliot Murphy
     limitations under the License.
 """
 
-import unittest
-from locationhash.locationhash import locationhash
+import unittest2 as unittest
+from locationhash import grid_id
 
 
 class locationhashTests(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_hash(self):
-        print "more"
-        pass
+    def test_grid_function(self):
+        latitude = 64.2145
+        longitude = 24.856
+        grid_width = 400
+        grid_height = 600
+        expected_result = "FIXME"
+        location_id = grid_id(latitude, longitude, grid_width, grid_height)
+        self.assertEqual(location_id, expected_result)

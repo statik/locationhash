@@ -15,8 +15,32 @@ Copyright 2011 Elliot Murphy
     limitations under the License.
 """
 
+from memo import memoized
 
-class locationhash:
-    def __init__(self):
-        print "location again"
-        pass
+
+class World2dGrid:
+    def __init__(self, width=400, height=600):
+        self.width = width
+        self.height = height
+        self.latitude_offset = 90
+        self.longitude_offset = 180
+        self.width_scale_factor = width / 360
+        self.height_scale_factor = height / 180
+
+    def calculate_bucket(self, latitude, longitude):
+        latitude = latitude + self.latitude_offset
+        longitude = longitude + self.longitude_offset
+        return (int(longitude * self.width_scale_factor),
+            int(latitude * self.height_scale_factor))
+
+
+@memoized
+def _get_world_grid(horizontal_slices, vertical_slices):
+    """Construct a World2dGrid Object of the correct size"""
+    return World2dGrid(width=horizontal_slices, height=vertical_slices)
+
+
+def grid_id(latitude, longitude, horizontal_slices, vertical_slices):
+    """Given a location, calculate the grid ID."""
+    grid = _get_world_grid(horizontal_slices, vertical_slices)
+    return grid.calculate_bucket(latitude, longitude)

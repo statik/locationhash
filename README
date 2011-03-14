@@ -1,4 +1,8 @@
-You need python, nose, coverage, and flake8 to play with this.
+You need python, unittest2, nose, coverage, and flake8 to play with this.
+
+Given python2.7 and distribute:
+
+  pip install unittest2 nose coverage flake8
 
 TODO:
 get autonose working.
