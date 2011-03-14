@@ -1,0 +1,4 @@
+include LICENSE
+include README
+include Makefile
+include MANIFEST.in

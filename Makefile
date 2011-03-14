@@ -18,6 +18,14 @@ info:
 clean:
 	find . -name \*pyc -exec rm {} \;
 	rm -rf cover
+	rm -rf dist
+	rm -rf MANIFEST
 
 autotest: #TODO figure out autotest crashing on snow leopard
 	autonose --console --info --config=.nosecfg
+
+dist:
+	python setup.py sdist
+	cd dist; tar tvf *.tar.gz
+
+.PHONY: dist
