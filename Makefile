@@ -1,3 +1,6 @@
+export ROOTDIR ?= $(shell git rev-parse --show-toplevel)
+export DBDIR ?= $(ROOTDIR)/tmp/mongo
+
 check: lint
 	@nosetests --config=.nosecfg
 
@@ -28,4 +31,14 @@ dist:
 	python setup.py sdist
 	cd dist; tar tvf *.tar.gz
 
-.PHONY: dist
+$(DBDIR):
+	mkdir -p $(DBDIR)
+
+start-db: $(DBDIR)
+	@mongod --pidfilepath $(DBDIR) --logpath $(DBDIR)/mongo.log --logappend --fork --dbpath $(DBDIR) --noauth
+
+stop-db: $(DBDIR)
+	@mongo admin util/shutdown.js
+
+.PHONY: dist autotest clean info lint check start-db stop-db
+.NOTPARALLEL:

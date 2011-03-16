@@ -1,6 +1,7 @@
 *.pyc
 cover/
 dist/
+tmp/
 MANIFEST
 .coverage
 *.swP
