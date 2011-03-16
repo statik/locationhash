@@ -1,8 +1,12 @@
-You need python, unittest2, nose, coverage, and flake8 to play with this.
+You need python, mongodb, unittest2, nose, coverage, pymongo, and flake8 to play with this.
+Ubuntu:
+ apt-get install mongodb python-pymongo distribute
+OS X:
+ brew install python mongodb distribute
 
 Given python2.7 and distribute:
 
-  pip install unittest2 nose coverage flake8
+  pip install unittest2 nose coverage flake8 pymongo
 
 TODO:
 get autonose working.
