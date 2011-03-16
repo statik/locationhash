@@ -29,7 +29,7 @@ class locationhashTests(unittest.TestCase):
         self.grid = World2dGrid()
 
     def test_convenience_function(self):
-        expected_result = "FIXME"
+        expected_result = (462, 204)
         location_id = grid_id(self.latitude, self.longitude,
             self.grid_width, self.grid_height)
         self.assertEqual(location_id, expected_result)

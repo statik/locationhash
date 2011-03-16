@@ -17,6 +17,7 @@ Copyright 2011 Elliot Murphy
 
 import unittest2 as unittest
 from pymongo import Connection
+from locationhash import grid_id
 from locationhash.tests.data import LOCATIONS
 
 
@@ -31,6 +32,13 @@ class MongoDBTests(unittest.TestCase):
     def test_inserting_locations(self):
         locations = self.db.locations
         for l in LOCATIONS:
-            locations.insert({'latitude': l[0], 'longitude': l[1]})
+            location_hash = grid_id(l[0], l[1], 400, 600)
+            locations.insert({
+                'latitude': l[0],
+                'longitude': l[1],
+                'hash': location_hash})
 
         self.assertEqual(len(LOCATIONS), locations.count())
+        expected_latitude = 37.58
+        spot = locations.find_one({"hash": (382, 203)})
+        self.assertEqual(expected_latitude, spot["latitude"])

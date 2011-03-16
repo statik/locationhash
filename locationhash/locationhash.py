@@ -33,8 +33,8 @@ class World2dGrid:
         assert -180 <= longitude <= 180, "impossible longitude"
         latitude = latitude + self.latitude_offset
         longitude = longitude + self.longitude_offset
-        return (int(longitude * self.width_scale_factor),
-            int(latitude * self.height_scale_factor))
+        return (int(latitude * self.height_scale_factor),
+                int(longitude * self.width_scale_factor))
 
     def calculate_bucket_geohash(self, latitude, longitude):
         """Calculate bucket using geohash algorithm
