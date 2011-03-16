@@ -15,22 +15,10 @@ Copyright 2011 Elliot Murphy
     limitations under the License.
 """
 
-import unittest2 as unittest
-from pymongo import Connection
-from locationhash.tests.data import LOCATIONS
-
-
-class MongoDBTests(unittest.TestCase):
-    def setUp(self):
-        self.connection = Connection()
-        self.db = self.connection.test_database
-
-    def tearDown(self):
-        self.connection.drop_database(self.db)
-
-    def test_inserting_locations(self):
-        locations = self.db.locations
-        for l in LOCATIONS:
-            locations.insert({'latitude': l[0], 'longitude': l[1]})
-
-        self.assertEqual(len(LOCATIONS), locations.count())
+LOCATIONS = [
+    (37.58, 23.43),     # Athens, Greece
+    (39.55, 116.25),    # Beijing, China
+    (-33.55, 18.22),    # Cape Town, South Africa
+    (53.20, -6.15),     # Dublin, Ireland
+    (24.33, 81.48),     # Key West, Florida
+    ]
